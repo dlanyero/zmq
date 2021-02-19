@@ -1,8 +1,8 @@
 // recieve.js by Dorcas Lanyero
 // Listens for messages on an endpoint and prints the messages to the console
 
-var zmq = require("zeromq")
-var sock = zmq.socket("pub")
+var zmq = require("zeromq"),
+    endpoint = zmq.socket("pub");
 
 try {
     endpoint.connect("tcp://127.0.0.1:5000");
