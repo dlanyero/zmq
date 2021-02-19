@@ -5,6 +5,7 @@
 import zmq
 import logging
 import traceback
+import time
 
 
 # #Establishes socket connection for bublishing messages.
@@ -19,7 +20,7 @@ def publish():
 
     #try connecting to socket
     try:
-        endpoint.connect(url)
+        endpoint.bind(url)
     except Exception as e:
         print("An error was encountered. The socket was either not successfuly created, or we could not connect to it")
         logging.error(traceback.format_exc())
@@ -28,17 +29,20 @@ def publish():
     get_send_message(endpoint)
 
     #close the socket
-    cntx.socket.close()
+    endpoint.close()
     print("The endpoint is  closed. You are no longer able to send messages")
 
 
 # #Gets messages from the console and publishes them
 def get_send_message(pub):
+    print("Type a message and hit enter to send. Type 'end' to stop")
     try:
         while True:
-            msg = input()
-            pub.send_string(msg, flags=0, copy=True, encoding='utf-8')
-            if msg == "end":
+            messagedata = input()
+            topic = "All"
+            pub.send_multipart([topic.encode(), messagedata.encode()])
+            time.sleep(1)
+            if messagedata == "end":
                 break
     except Exception as e:
         print("An error occured while sending this message. Please try again,")
