@@ -4,7 +4,7 @@
 var zmq = require('zeromq'),
     endpoint = zmq.socket('sub');
 
-//try commection
+//try connection
 try {
     endpoint.connect("tcp://127.0.0.1:5000");
     endpoint.subscribe('All');
