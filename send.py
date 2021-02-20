@@ -1,6 +1,6 @@
 #Sender.py by Dorcas Lanyero
-#Recieves string input from the console and send sends it to a recipient application listening on the same socket
-#Closes the socket and stops sending messages when the user enters the string "close"
+#Recieves string input from the console and sends it to a recipient application listening on the same socket
+#Closes the socket and stops sending messages when the user enters the string "end"
 
 import zmq
 import logging
